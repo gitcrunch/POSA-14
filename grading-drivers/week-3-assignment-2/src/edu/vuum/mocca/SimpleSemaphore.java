@@ -29,7 +29,7 @@ public class SimpleSemaphore {
      */
     // TODO - you fill in here.  Make sure that this data member will
     // ensure its values aren't cached by multiple Threads..
-	private int mCount;
+	private volatile int mCount;
     public SimpleSemaphore(int permits, boolean fair) {
         // TODO - you fill in here to initialize the SimpleSemaphore,
         // making sure to allow both fair and non-fair Semaphore
@@ -48,14 +48,12 @@ public class SimpleSemaphore {
     public void acquire() throws InterruptedException {
         // TODO - you fill in here.
     	final ReentrantLock lock = this.mLock;
-    	lock.lock();
-    	try {
+    	lock.lockInterruptibly();
+
     		while (mCount == 0)
     		notEmpty.await();
-    	}
-    	finally {
-    	mCount--;
-    	}
+    		mCount--;
+  
     }
 
     /**
@@ -65,25 +63,15 @@ public class SimpleSemaphore {
     public void acquireUninterruptibly() {
         // TODO - you fill in here.
     	final ReentrantLock lock = this.mLock;
-    	try {
-			lock.lockInterruptibly();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	try {
+    	lock.lock();
     		while (mCount == 0)
-    			notEmpty.await();
-    		
-    	} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			mCount--;
-    			}
-    		
-    	
-    
+				try {
+					notEmpty.await();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		mCount--;
     
     }
 
@@ -92,8 +80,8 @@ public class SimpleSemaphore {
      */
     void release() {
         // TODO - you fill in here.
-    	final ReentrantLock lock = this.mLock;
-    	lock.unlock();
+    	//final ReentrantLock lock = this.mLock;
+    	mLock.unlock();
     	mCount++;
     	
     }
