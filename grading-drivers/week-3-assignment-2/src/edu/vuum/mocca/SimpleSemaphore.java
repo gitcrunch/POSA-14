@@ -67,7 +67,7 @@ public class SimpleSemaphore {
     	lock.lock();
     	try {	
     		while (mCount == 0)
-			notEmpty.await();	
+			notEmpty.await();
     		mCount--;
     	} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
