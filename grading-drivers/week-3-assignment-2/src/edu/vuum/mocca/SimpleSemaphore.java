@@ -50,11 +50,11 @@ public class SimpleSemaphore {
         // TODO - you fill in here.
     	final ReentrantLock lock = this.mLock;
     	lock.lockInterruptibly();
-
+    	try {
     		while (mCount == 0)
     		notEmpty.await();
     		mCount--;
-  
+    	} finally { lock.unlock();}
     }
 
     /**
@@ -65,14 +65,14 @@ public class SimpleSemaphore {
         // TODO - you fill in here.
     	final ReentrantLock lock = this.mLock;
     	lock.lock();
+    	try {	
     		while (mCount == 0)
-				try {
-					notEmpty.await();
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			notEmpty.await();	
     		mCount--;
+    	} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {lock.unlock();}
     
     }
 
@@ -81,9 +81,14 @@ public class SimpleSemaphore {
      */
     void release() {
         // TODO - you fill in here.
-    	//final ReentrantLock lock = this.mLock;
-    	mLock.unlock();
-    	mCount++;
+    	final ReentrantLock lock = this.mLock;
+    	lock.lock();
+    	
+    	try {mCount++;
+    	notEmpty.signal();}
+    	finally {
+    	lock.unlock();
+    	}
     	
     }
 
