@@ -23,7 +23,7 @@ public class ConsolePlatformStrategy extends PlatformStrategy
     PrintStream mOutput;
 
     /** Ctor. */
-    ConsolePlatformStrategy(Object output) 
+    public ConsolePlatformStrategy(Object output) 
     {
         mOutput = (PrintStream) output;
     }
@@ -38,7 +38,7 @@ public class ConsolePlatformStrategy extends PlatformStrategy
     public void print(String outputString)
     {
         /** Print to the console window. */
-        System.out.println(outputString);
+        mOutput.println(outputString);
     }
 
     /** Indicate that a game thread has finished running. */
@@ -56,18 +56,13 @@ public class ConsolePlatformStrategy extends PlatformStrategy
         }
     }
 
-    /** Returns a string revealing the platform in use. */
-    public String platformName() 
-    {
-        return System.getProperty("java.specification.vendor");
-    }
-	
     /**
      * Error log formats the message and displays it for the debugging
      * purposes.
      */
     public void errorLog(String javaFile, String errorMessage) 
     {
-        System.out.println(javaFile + " " + errorMessage);
+        mOutput.println(javaFile + " " + errorMessage);
     }
 }
+
