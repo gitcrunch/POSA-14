@@ -4,6 +4,10 @@ import android.content.Context;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.TextView;
+<<<<<<< HEAD
+=======
+import android.view.WindowManager;
+>>>>>>> upstream/master
 
 import com.robotium.solo.Solo;
 
@@ -53,6 +57,17 @@ public class PingPongActivityTest
         outputTextView_ = (TextView) mSolo
             .getView(edu.vuum.mocca.R.id.pingpong_output);
 
+<<<<<<< HEAD
+=======
+        // Prevent lockscreen from preventing test.
+        getInstrumentation().runOnMainSync(new Runnable() {
+                @Override
+                    public void run() {
+                    getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD);
+                }
+            });
+
+>>>>>>> upstream/master
         getInstrumentation().callActivityOnStart(getActivity());
         getInstrumentation().callActivityOnResume(getActivity());
     }

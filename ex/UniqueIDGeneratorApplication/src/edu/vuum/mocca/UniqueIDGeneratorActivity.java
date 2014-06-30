@@ -18,8 +18,13 @@ import android.widget.TextView;
 /**
  * @class UniqueIDGeneratorActivity
  *
+<<<<<<< HEAD
  * @brief A class that allows a user to generate a system-wide Unique
  *        ID.
+=======
+ * @brief A class that interacts with a user to invoke a Bound Service
+ *        that generates a system-wide Unique ID.
+>>>>>>> upstream/master
  */
 public class UniqueIDGeneratorActivity extends Activity {
     /**
@@ -60,7 +65,11 @@ public class UniqueIDGeneratorActivity extends Activity {
     }
 
     /** 
+<<<<<<< HEAD
      * This ServiceConnection is used to receive a Messenger proxy
+=======
+     * This ServiceConnection is used to receive a Messenger reference
+>>>>>>> upstream/master
      * after binding to the UniqueIDGeneratorService using bindService().
      */
     private ServiceConnection mSvcConn = new ServiceConnection() {
@@ -81,7 +90,11 @@ public class UniqueIDGeneratorActivity extends Activity {
             /**
              * Called if the Service crashes and is no longer
              * available.  The ServiceConnection will remain bound,
+<<<<<<< HEAD
              * but the service will not respond to any requests.
+=======
+             * but the Service will not respond to any requests.
+>>>>>>> upstream/master
              */
             public void onServiceDisconnected(ComponentName className) {
                 mReqMessengerRef = null;
