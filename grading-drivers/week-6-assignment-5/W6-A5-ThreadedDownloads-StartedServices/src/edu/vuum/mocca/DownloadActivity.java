@@ -5,6 +5,7 @@ import java.lang.ref.WeakReference;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -80,11 +81,8 @@ public class DownloadActivity extends DownloadBase {
                 // the DownloadActivity as a pathname who's Bundle
             	// key is defined by DownloadUtils.PATHNAME_KEY
             	String pathName = msg.getData().getString(DownloadUtils.PATHNAME_KEY);
-            if (msg.arg1 != RESULT_OK || pathName == null)
-            	//activity.showDialog(RESULT_CANCELED);
-         
             
-            activity.displayBitmap(pathName);
+            	activity.displayBitmap(pathName);
             
             }
     	}
@@ -117,7 +115,7 @@ public class DownloadActivity extends DownloadBase {
             // returned from the makeIntent() factory method.
 
             which = "Starting IntentService";
-            Intent intent = DownloadIntentService.makeIntent(getApplicationContext(), handler, which);
+            Intent intent = DownloadIntentService.makeIntent(this, handler, getUrlString());
             startService(intent);
             
             break;
@@ -128,7 +126,7 @@ public class DownloadActivity extends DownloadBase {
             // returned from the makeIntent() factory method.
 
             which = "Starting ThreadPoolDownloadService";
-            Intent poolIntent = ThreadPoolDownloadService.makeIntent(getApplicationContext(), handler, which);
+            Intent poolIntent = ThreadPoolDownloadService.makeIntent(this, handler, getUrlString());
             startService(poolIntent);
             break;
         

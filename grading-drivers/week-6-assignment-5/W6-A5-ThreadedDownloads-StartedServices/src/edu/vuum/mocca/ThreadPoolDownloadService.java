@@ -96,7 +96,8 @@ public class ThreadPoolDownloadService extends Service {
     	
         Runnable downloadRunnable = new Runnable(){ public void run(){
         	DownloadUtils.downloadAndRespond(getApplicationContext(), intent.getData(), msg);
-        }};
+        }
+        };
 
         mExecutor.execute(downloadRunnable);
       

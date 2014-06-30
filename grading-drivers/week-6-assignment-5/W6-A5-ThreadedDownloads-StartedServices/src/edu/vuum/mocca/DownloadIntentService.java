@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Messenger;
+import android.util.Log;
 
 /**
  * @class DownloadIntentService
@@ -87,7 +88,7 @@ public class DownloadIntentService extends IntentService {
         // in the intent and returns the file's pathname using a
         // Messenger who's Bundle key is defined by DownloadUtils.MESSENGER_KEY
     	Messenger msg = (Messenger) intent.getExtras().get(DownloadUtils.MESSENGER_KEY);
-    	
+    
     	DownloadUtils.downloadAndRespond(getApplicationContext(), intent.getData(), msg);
     	
     }
