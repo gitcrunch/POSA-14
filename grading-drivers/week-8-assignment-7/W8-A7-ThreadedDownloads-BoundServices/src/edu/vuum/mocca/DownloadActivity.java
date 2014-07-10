@@ -169,7 +169,8 @@ public class DownloadActivity extends DownloadBase {
             // TODO - You fill in here to use mDownloadCall to
             // download the image & then display it.
             try {
-				mDownloadCall.downloadImage(uri);
+				displayBitmap(mDownloadCall.downloadImage(uri));
+				
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -181,6 +182,7 @@ public class DownloadActivity extends DownloadBase {
             // mDownloadRequest, passing in the appropriate Uri and
             // callback.
         	try {
+        		
 				mDownloadRequest.downloadImage(uri, mDownloadCallback);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block

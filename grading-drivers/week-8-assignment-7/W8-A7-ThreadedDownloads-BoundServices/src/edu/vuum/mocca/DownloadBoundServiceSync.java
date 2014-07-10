@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 /**
  * @class DownloadBoundServiceSync
@@ -51,7 +52,8 @@ public class DownloadBoundServiceSync extends Service {
                 // download the file using the appropriate helper
                 // method in DownloadUtils and then return the
                 // pathname back to the client.
-                return DownloadUtils.downloadFile(getApplicationContext(), uri);
+            	
+                return DownloadUtils.downloadFile(DownloadBoundServiceSync.this, uri);
             }
 	};
 	

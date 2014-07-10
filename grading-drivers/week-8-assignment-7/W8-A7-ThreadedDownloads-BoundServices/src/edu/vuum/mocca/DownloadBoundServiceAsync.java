@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.RemoteException;
+import android.util.Log;
 
 /**
  * @class DownloadBoundServiceAsync
@@ -52,6 +53,7 @@ public class DownloadBoundServiceAsync extends Service{
                 // the appropriate helper method in DownloadUtils and
                 // then send the pathname back to the client via the
                 // callback object.
+            	Log.d("This is from BoundASync class", "ASyndownloadImage");
             	String pathname = DownloadUtils.downloadFile(getApplicationContext(), uri);
             	callback.sendPath(pathname);
             }
